@@ -1,9 +1,16 @@
 #include "widget.h"
 #include "ui_widget.h"
+#include <string>
+#include <QFileDialog>
+#include "playerframe.h"
+
+using std::to_string;
+using std::string;
+
 
 Widget::Widget(QWidget *parent)
     : QWidget(parent)
-    , ui(new Ui::Widget)
+    , ui(new Ui::Widget),player1(parent, QMediaPlayer::VideoSurface)
 {
     ui->setupUi(this);
     playerindex = 0;
@@ -25,7 +32,12 @@ Widget::Widget(QWidget *parent)
     mTimer->setInterval(100);
     mTimer->start();
     connect( mTimer, SIGNAL (timeout()), SLOT(volumeStateChanged()));
+    connect (mTimer, SIGNAL (timeout()),SLOT (updateduration()));
+    connect (mTimer, SIGNAL (timeout()),SLOT (endduration()));
     connect (player, SIGNAL (stateChanged(QMediaPlayer::State)), this, SLOT (playerStateChanged()));
+
+    pFrame = new PlayerFrame();
+    player1.setVideoOutput(pFrame);
 }
 
 Widget::~Widget(){
@@ -34,20 +46,28 @@ Widget::~Widget(){
 
 //slots
 void Widget::on_open_clicked(){
-    QString array = QFileDialog::getExistingDirectory(this,"need to play file","C:/Users/loulo/Desktop/19 UI/videos");
-    if(array.length() <= 0)
-        return;
-    std::string dirName = array.toStdString();
-    getVideo(dirName);
-    creatbuttonList();
-    playerindex = 0;
+    QString path = QFileDialog::getOpenFileName(this,"Choose videofile..","","*.mp4;*.mp3");
+    QFile f(path);
+    QFileInfo fileInfo(f.fileName());
+    QString filename = fileInfo.fileName();
+
+    player->setMedia(QUrl::fromLocalFile(path));
+
+    player1.setMedia(QUrl::fromLocalFile(path));
+
+    connect(pFrame, SIGNAL(fnSurfaceStopped(QPixmap)),
+            this, SLOT(GetFrame(QPixmap)),Qt::QueuedConnection);
+
+    connect(this, SIGNAL(fnClearPixmap()),
+            pFrame, SLOT(fnClearPixmap()),Qt::QueuedConnection);
+    player->play();
 }
 
 
 void Widget::on_pause_clicked(){
-    if(playernumbers == 0){
-        return;
-    }
+    
+    
+   
     switch (player->state())
     {
         case QMediaPlayer::State::PausedState:
@@ -285,6 +305,98 @@ void Widget::creatbuttonList() {
 }
 
 
+//void Widget::updateduration(){
+//    qint64 time1 = player->position()/1000;
+//    qint64 time2 = player->duration()/1000;
+//    QString Str1 = QString::number(time1);
+//    Str1 = Str1 + "/";
+//    Str1 = "00:00:" + Str1;
+//    QString Str2 = QString::number(time2);
+//    Str2 = "00:00:" + Str2;
+//    Str1.append(Str2);
+//    ui->time->setText(Str1);
+//}
+void Widget::updateduration(){
+    qint64 seconds = player->position()/1000;
 
+
+     string stringData;
+     int minutes = 0, hours = 0;
+
+
+    if (hours > 9){
+        stringData = to_string(hours) + ":";
+    }else{
+        stringData = to_string(hours) + "0:";
+    }
+
+    if((minutes = seconds / 60) > 0){
+        seconds -= minutes * 60;
+        if((hours = minutes / 60) > 0){
+            minutes -= hours * 60;
+        }
+    }
+    if(minutes > 9){
+         stringData += to_string(minutes) + ":";
+    }else{
+        stringData += "0" + to_string(minutes) + ":";
+    }
+    if(seconds > 9){
+         stringData += to_string(seconds);
+    }else{
+        stringData += "0" + to_string(seconds);
+    }
+    stringData = stringData + " /";
+
+    ui->time->setText(QString::fromStdString(stringData));
+}
+
+
+void Widget::endduration(){
+    qint64 seconds = player->duration()/1000;
+
+
+     string stringData;
+     int minutes = 0, hours = 0;
+
+
+    if (hours > 9){
+        stringData = to_string(hours) + ":";
+    }else{
+        stringData = to_string(hours) + "0:";
+    }
+
+    if((minutes = seconds / 60) > 0){
+        seconds -= minutes * 60;
+        if((hours = minutes / 60) > 0){
+            minutes -= hours * 60;
+        }
+    }
+    if(minutes > 9){
+         stringData += to_string(minutes) + ":";
+    }else{
+        stringData += "0" + to_string(minutes) + ":";
+    }
+    if(seconds > 9){
+         stringData += to_string(seconds);
+    }else{
+        stringData += "0" + to_string(seconds);
+    }
+
+    ui->endTime->setText(QString::fromStdString(stringData));
+}
 //end function
+
+
+void Widget::on_groupBox_clicked()
+{
+
+}
+
+
+void Widget::GetFrame(QPixmap pix)
+{
+    player1.pause();
+    pixmap = pix;
+}
 

@@ -21,13 +21,17 @@ SOURCES += \
     the_button.cpp \
     the_player.cpp \
     videowidget.cpp \
-    widget.cpp
+     playerframe.cpp \
+    widget.cpp 
+    
 
 HEADERS += \
     the_button.h \
     the_player.h \
     videowidget.h \
-    widget.h
+    playerframe.h \
+    widget.h 
+    
 
 FORMS += \
     widget.ui

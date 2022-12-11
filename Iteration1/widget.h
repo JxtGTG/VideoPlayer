@@ -24,6 +24,7 @@
 #include <QKeyEvent>
 #include <QMouseEvent>
 #include <QMediaPlayer>
+#include "playerframe.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Widget; }
@@ -50,6 +51,14 @@ private slots:
     void on_next_clicked();
     void getbuttonindex(int index);
     void on_comboBox_activated(int index);
+    void updateduration();
+    void endduration();
+    void GetFrame(QPixmap pix);
+
+    void on_groupBox_clicked();
+
+Q_SIGNALS:
+    void fnClearPixmap();
 
 private:
     Ui::Widget *ui;
@@ -65,6 +74,13 @@ private:
     void playMovie();
     std::vector<TheButtonInfo> getInfoIn (std::string loc);
     void getVideo(const std::string dirName);
+    
+   
+    QMediaPlayer player1;
+    PlayerFrame *pFrame;
+    QPixmap pixmap;
+    int fileCounter = 0;
+    QString filename;
 
 
 };
