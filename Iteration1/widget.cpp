@@ -44,30 +44,26 @@ Widget::~Widget(){
     delete ui;
 }
 
+
+
 //slots
 void Widget::on_open_clicked(){
-    QString path = QFileDialog::getOpenFileName(this,"Choose videofile..","","*.mp4;*.mp3");
-    QFile f(path);
-    QFileInfo fileInfo(f.fileName());
-    QString filename = fileInfo.fileName();
+    QString array = QFileDialog::getExistingDirectory(this,"need to play file","C:/Users/loulo/Desktop/19 UI/videos");
+    if(array.length() <= 0)
+        return;
+    std::string dirName = array.toStdString();
+    getVideo(dirName);
+    creatbuttonList();
+    playerindex = 0;
+    // setVideoTitle(playerindex);
 
-    player->setMedia(QUrl::fromLocalFile(path));
-
-    player1.setMedia(QUrl::fromLocalFile(path));
-
-    connect(pFrame, SIGNAL(fnSurfaceStopped(QPixmap)),
-            this, SLOT(GetFrame(QPixmap)),Qt::QueuedConnection);
-
-    connect(this, SIGNAL(fnClearPixmap()),
-            pFrame, SLOT(fnClearPixmap()),Qt::QueuedConnection);
-    player->play();
 }
 
-
 void Widget::on_pause_clicked(){
+    if(playernumbers == 0){
+        return;
+    }
     
-    
-   
     switch (player->state())
     {
         case QMediaPlayer::State::PausedState:
@@ -220,6 +216,14 @@ void Widget::getbuttonindex(int index){
     playerindex=index;
 }
 //end slots
+
+// void Widget::setVideoTitle(int index){
+//     QString title = player->getButtons()->at(index)->info->videoname;
+//     ui->videoname->setText(title);
+//     playertitle=title;
+//     qDebug()<<playertitle;
+
+// }
 
 
 //function
@@ -398,5 +402,26 @@ void Widget::GetFrame(QPixmap pix)
 {
     player1.pause();
     pixmap = pix;
+}
+
+
+void Widget::on_pushButton_clicked()
+{
+    QString path = QFileDialog::getOpenFileName(this,"Choose videofile..","","*.mp4;*.mp3");
+    QFile f(path);
+    QFileInfo fileInfo(f.fileName());
+    QString filename = fileInfo.fileName();
+
+    player->setMedia(QUrl::fromLocalFile(path));
+
+    player1.setMedia(QUrl::fromLocalFile(path));
+
+    connect(pFrame, SIGNAL(fnSurfaceStopped(QPixmap)),
+            this, SLOT(GetFrame(QPixmap)),Qt::QueuedConnection);
+
+    connect(this, SIGNAL(fnClearPixmap()),
+            pFrame, SLOT(fnClearPixmap()),Qt::QueuedConnection);
+    playernumbers=1;
+    player->play();
 }
 

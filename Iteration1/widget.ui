@@ -340,7 +340,7 @@
          <widget class="QWidget" name="horizontalWidget" native="true">
           <property name="maximumSize">
            <size>
-            <width>61</width>
+            <width>120</width>
             <height>61</height>
            </size>
           </property>
@@ -371,6 +371,26 @@
              <property name="icon">
               <iconset resource="resource.qrc">
                <normaloff>:/icon/folderOpen.png</normaloff>:/icon/folderOpen.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>40</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="flat">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButton">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset resource="resource.qrc">
+               <normaloff>:/file1.png</normaloff>:/file1.png</iconset>
              </property>
              <property name="iconSize">
               <size>

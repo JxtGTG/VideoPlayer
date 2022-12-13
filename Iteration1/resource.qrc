@@ -23,5 +23,6 @@
         <file>icon/volumeHigh.png</file>
         <file>icon/fastforward.png</file>
         <file>icon/speedup.png</file>
+        <file>../../file1.png</file>
     </qresource>
 </RCC>

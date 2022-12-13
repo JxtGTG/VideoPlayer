@@ -57,6 +57,8 @@ private slots:
 
     void on_groupBox_clicked();
 
+    void on_pushButton_clicked();
+
 Q_SIGNALS:
     void fnClearPixmap();
 
