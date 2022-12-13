@@ -22,6 +22,7 @@ SOURCES += \
     the_player.cpp \
     videowidget.cpp \
      playerframe.cpp \
+    coloroptiondialog.cpp \
     widget.cpp 
     
 
@@ -30,11 +31,13 @@ HEADERS += \
     the_player.h \
     videowidget.h \
     playerframe.h \
+    coloroptiondialog.h \
     widget.h 
     
 
 FORMS += \
-    widget.ui
+    widget.ui \
+    coloroptiondialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -25,6 +25,7 @@
 #include <QMouseEvent>
 #include <QMediaPlayer>
 #include "playerframe.h"
+#include "coloroptiondialog.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Widget; }
@@ -59,6 +60,10 @@ private slots:
 
     void on_pushButton_clicked();
 
+    void on_pushButton_2_clicked();
+
+      void on_pushButton_3_clicked();
+
 Q_SIGNALS:
     void fnClearPixmap();
 
@@ -70,6 +75,8 @@ private:
 //    QMediaPlayer *mediaPlayer;
     int playerindex;
     int playernumbers;
+    int state = 1;
+   
 
     void Init();
     void creatbuttonList();
@@ -77,7 +84,7 @@ private:
     std::vector<TheButtonInfo> getInfoIn (std::string loc);
     void getVideo(const std::string dirName);
     
-   
+    ColorOptionDialog* dialog;
     QMediaPlayer player1;
     PlayerFrame *pFrame;
     QPixmap pixmap;

@@ -23,7 +23,7 @@
    <string>Widget</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(255, 255, 255);
+   <string notr="true">background-color: rgb(184, 212, 184) ; color: rgb(0,0,0) ;
 </string>
   </property>
   <layout class="QGridLayout" name="gridLayout_3">
@@ -38,10 +38,100 @@
         </size>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(255, 255, 255);</string>
+        <string notr="true">background-color: rgb(255, 250, 250) ; color: rgb(0,0,0) ;</string>
        </property>
        <layout class="QGridLayout" name="gridLayout">
-        <item row="4" column="0">
+        <item row="0" column="0">
+         <widget class="QWidget" name="horizontalWidget" native="true">
+          <property name="maximumSize">
+           <size>
+            <width>170</width>
+            <height>61</height>
+           </size>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_2">
+           <item>
+            <widget class="QPushButton" name="open">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>50</width>
+               <height>50</height>
+              </size>
+             </property>
+             <property name="focusPolicy">
+              <enum>Qt::NoFocus</enum>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-image: url(:/211791_pause_icon.png);</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset resource="resource.qrc">
+               <normaloff>:/icon/folderOpen.png</normaloff>:/icon/folderOpen.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>40</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="flat">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButton">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset resource="resource.qrc">
+               <normaloff>:/icon/file1.png</normaloff>:/icon/file1.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>40</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="flat">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButton_2">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset resource="resource.qrc">
+               <normaloff>:/icon/setting.png</normaloff>:/icon/setting.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>40</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="flat">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="7" column="0">
          <widget class="QWidget" name="bottomwidget" native="true">
           <property name="maximumSize">
            <size>
@@ -50,7 +140,7 @@
            </size>
           </property>
           <property name="styleSheet">
-           <string notr="true">background-color: rgb(255, 255, 255);</string>
+           <string notr="true">background-color: rgb(135, 206, 235);</string>
           </property>
           <layout class="QHBoxLayout" name="horizontalLayout">
            <item>
@@ -243,6 +333,9 @@
            </item>
            <item>
             <widget class="QComboBox" name="comboBox">
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(255, 187, 255);</string>
+             </property>
              <property name="iconSize">
               <size>
                <width>35</width>
@@ -323,7 +416,7 @@
           </layout>
          </widget>
         </item>
-        <item row="2" column="0">
+        <item row="5" column="0">
          <widget class="QSlider" name="playerslider">
           <property name="focusPolicy">
            <enum>Qt::NoFocus</enum>
@@ -333,77 +426,36 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="0">
+        <item row="2" column="0">
          <widget class="VideoWidget" name="videoWidget" native="true"/>
         </item>
-        <item row="0" column="0">
-         <widget class="QWidget" name="horizontalWidget" native="true">
+        <item row="0" column="1">
+         <widget class="QPushButton" name="pushButton_3">
           <property name="maximumSize">
            <size>
-            <width>120</width>
-            <height>61</height>
+            <width>50</width>
+            <height>50</height>
            </size>
           </property>
-          <layout class="QHBoxLayout" name="horizontalLayout_2">
-           <item>
-            <widget class="QPushButton" name="open">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>0</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>50</width>
-               <height>50</height>
-              </size>
-             </property>
-             <property name="focusPolicy">
-              <enum>Qt::NoFocus</enum>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background-image: url(:/211791_pause_icon.png);</string>
-             </property>
-             <property name="text">
-              <string/>
-             </property>
-             <property name="icon">
-              <iconset resource="resource.qrc">
-               <normaloff>:/icon/folderOpen.png</normaloff>:/icon/folderOpen.png</iconset>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>40</width>
-               <height>40</height>
-              </size>
-             </property>
-             <property name="flat">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="pushButton">
-             <property name="text">
-              <string/>
-             </property>
-             <property name="icon">
-              <iconset resource="resource.qrc">
-               <normaloff>:/file1.png</normaloff>:/file1.png</iconset>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>40</width>
-               <height>40</height>
-              </size>
-             </property>
-             <property name="flat">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-          </layout>
+          <property name="layoutDirection">
+           <enum>Qt::LeftToRight</enum>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="resource.qrc">
+            <normaloff>:/icon/Theme.png</normaloff>:/icon/Theme.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>40</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
+          </property>
          </widget>
         </item>
        </layout>
@@ -417,7 +469,8 @@
   <customwidget>
    <class>VideoWidget</class>
    <extends>QWidget</extends>
-   <header>videowidget.h</header>
+   <header location="global">videowidget.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources>

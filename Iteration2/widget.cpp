@@ -3,6 +3,9 @@
 #include <string>
 #include <QFileDialog>
 #include "playerframe.h"
+#include "ui_coloroptiondialog.h"
+#include "coloroptiondialog.h"
+
 
 using std::to_string;
 using std::string;
@@ -17,6 +20,7 @@ Widget::Widget(QWidget *parent)
     playernumbers = 0;
     player = new ThePlayer;
     player->setVideoOutput(ui->videoWidget);
+    dialog=new ColorOptionDialog();
     //Set video progress bar
     connect(player,&QMediaPlayer::durationChanged,ui->playerslider,&QSlider::setMaximum);
     connect(player,&QMediaPlayer::positionChanged,ui->playerslider,&QSlider::setValue);
@@ -26,6 +30,11 @@ Widget::Widget(QWidget *parent)
     connect(player,&QMediaPlayer::volumeChanged,ui->volumeslider,&QSlider::setValue);
     connect(ui->volumeslider,&QSlider::sliderMoved,player,&QMediaPlayer::setVolume);
     connect (player,SIGNAL (stateChanged(QMediaPlayer::State)), this, SLOT (volumeStateChanged()));
+
+    connect(dialog->ui->brightnessSlider,&QSlider::sliderMoved,ui->videoWidget,&VideoWidget::setBrightness);
+    connect(dialog->ui->contrastSlider,&QSlider::sliderMoved,ui->videoWidget,&VideoWidget::setContrast);
+    connect(dialog->ui->hueSlider,&QSlider::sliderMoved,ui->videoWidget,&VideoWidget::setHue);
+    connect(dialog->ui->sturationSlider,&QSlider::sliderMoved,ui->videoWidget,&VideoWidget::setSaturation);
 
     //Detect video status and change button icon
     QTimer *mTimer = new QTimer(nullptr);
@@ -55,6 +64,14 @@ void Widget::on_open_clicked(){
     getVideo(dirName);
     creatbuttonList();
     playerindex = 0;
+    player->setMedia(*(buttonList.at(0)->info)->url);
+    player1.setMedia(*(buttonList.at(0)->info)->url);
+    connect(pFrame, SIGNAL(fnSurfaceStopped(QPixmap)),
+            this, SLOT(GetFrame(QPixmap)),Qt::QueuedConnection);
+
+    connect(this, SIGNAL(fnClearPixmap()),
+            pFrame, SLOT(fnClearPixmap()),Qt::QueuedConnection);
+    player->play();
     // setVideoTitle(playerindex);
 
 }
@@ -239,9 +256,9 @@ std::vector<TheButtonInfo> Widget::getInfoIn (std::string loc) {
             if (f.contains("."))
 
 #if defined(_WIN32)
-            if (f.contains(".wmv")) { // windows
+            if (f.contains(".mp4")) { // windows
 #else
-            if (f.contains(".mp4") || f.contains("MOV"))  { // mac/linux
+            if (f.contains(".wmv") || f.contains("MOV"))  { // mac/linux
 #endif
 
             QString thumb = f.left( f .length() - 4) +".png";
@@ -424,4 +441,31 @@ void Widget::on_pushButton_clicked()
     playernumbers=1;
     player->play();
 }
+
+
+void Widget::on_pushButton_2_clicked()
+{
+     dialog->show();
+}
+
+
+void Widget::on_pushButton_3_clicked()
+{
+        if(state){
+        QPalette bgpal = palette();
+        bgpal.setColor (QPalette::Background, QColor (255, 240, 245));
+        //bgpal.setColor (QPalette::Background, Qt::transparent);
+        bgpal.setColor (QPalette::Foreground, QColor (255,255,255,255)); setPalette (bgpal);
+        state = 0;
+        }
+        else{
+            QPalette bgpal = palette();
+            bgpal.setColor (QPalette::Background, QColor (184, 212, 184));
+            //bgpal.setColor (QPalette::Background, Qt::transparent);
+            bgpal.setColor (QPalette::Foreground, QColor (255,255,255,255)); setPalette (bgpal);
+            state = 1;
+        }
+}
+
+
 

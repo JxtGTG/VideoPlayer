@@ -8,7 +8,7 @@
 void ThePlayer::setContent(std::vector<TheButton*>* b, std::vector<TheButtonInfo>* i) {
     buttons = b;
     infos = i;
-    jumpTo(buttons -> at(0) -> info);
+    
 }
 
 
@@ -25,5 +25,5 @@ void ThePlayer::playStateChanged (QMediaPlayer::State ms) {
 
 void ThePlayer::jumpTo (TheButtonInfo* button) {
     setMedia( * button -> url);
-    play();
+   
 }
