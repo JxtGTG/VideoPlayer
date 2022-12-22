@@ -536,10 +536,21 @@ void Widget::on_pushButton_5_clicked()
 
 void Widget::on_pushButton_6_clicked()
 {
-     qDebug() << "fuck "  << endl;
+     qDebug() << "6"  << endl;
     timestamps_layout->add_timestamp();
-     qDebug() << "fuck "  << endl;
+     qDebug() << "6"  << endl;
 }
 
+
+
+
+void Widget::on_user_clicked() {
+    QMessageBox::question(
+        nullptr,
+        QString("Tomeo"),
+        QString("In the future can be used by users to log in or register,"
+                " can enhance the video player personalization. Not developed yet."),
+        QMessageBox::Yes);
+}
 
 

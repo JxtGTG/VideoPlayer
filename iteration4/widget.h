@@ -74,6 +74,8 @@ private slots:
 
     void on_pushButton_7_clicked();
 
+    void on_user_clicked();
+
 Q_SIGNALS:
     void fnClearPixmap();
 
